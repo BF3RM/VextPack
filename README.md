@@ -19,13 +19,12 @@ yarn -D vextpack
 VextPack is just a regular Webpack plugin and can be used as follows:
 ```js
 // webpack.config.js
-
-const { VextPack } = require('vextpack');
+const { VextPackPlugin } = require('vextpack');
 
 module.exports = {
     // ...
     plugins: [
-        new VextPack({
+        new VextPackPlugin({
             // Specify the location of the vuic compiler (not included in this package!)
             compilerPath: '../Tools/vuicc.exe',
 
