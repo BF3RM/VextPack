@@ -1,0 +1,30 @@
+{
+  "name": "vextpack",
+  "version": "0.1.0",
+  "description": "A webpack plugin to automatically build a vuic file for Venice Unleashed",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulhobbel/VextPack.git"
+  },
+  "keywords": [
+    "venice-unleashed",
+    "vext",
+    "webpack",
+    "vuic"
+  ],
+  "author": "Paul Hobbel <contact@paulhobbel.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/paulhobbel/VextPack/issues"
+  },
+  "homepage": "https://github.com/paulhobbel/VextPack#readme",
+  "devDependencies": {
+    "@types/webpack": "^4.39.4",
+    "webpack": "^4.41.2"
+  }
+}
