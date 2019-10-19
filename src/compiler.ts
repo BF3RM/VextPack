@@ -1,4 +1,5 @@
 import { spawn } from 'child_process';
+import { join } from 'path';
 
 export interface CompilerOptions {
     sourcePath: string;
@@ -10,7 +11,10 @@ export class VuicCompiler {
     }
 
     compile(options: CompilerOptions): Promise<void> {
-        const child = spawn(this._path, [options.sourcePath, `${options.outputPath}/ui.vuic`], { stdio: 'inherit' });
+        const child = spawn(this._path, [options.sourcePath, join(options.outputPath, 'ui.vuic')], {
+            stdio: 'inherit',
+            cwd: process.cwd()
+        });
 
         return new Promise((resolve, reject) => {
             child.on('close', code => {

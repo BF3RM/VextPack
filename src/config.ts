@@ -4,4 +4,7 @@ export interface VextPackConfig {
 
     // Path of the vuic compiler (required)
     compilerPath: string;
+
+    // Custom file name for the vuic compiler (default: vuicc.exe)
+    compilerFile: string;
 }
