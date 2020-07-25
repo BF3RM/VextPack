@@ -7,4 +7,7 @@ export interface VextPackConfig {
 
     // Custom file name for the vuic compiler (default: vuicc.exe)
     compilerFile: string;
+
+    // Make a hot reloadable ui build, this creates a proxy ui that remotely loads the real ui
+    hotReloadSupport: boolean;
 }
