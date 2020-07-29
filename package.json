@@ -1,6 +1,6 @@
 {
   "name": "vextpack",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A webpack plugin to automatically build a vuic file for Venice Unleashed",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

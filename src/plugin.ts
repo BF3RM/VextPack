@@ -2,6 +2,7 @@ import { Compiler, Plugin } from "webpack";
 import { VextPackConfig } from "./config";
 import { VuicCompiler } from "./compiler";
 import { join } from "path";
+import fs from 'fs';
 
 export class VextPackPlugin implements Plugin {
 
@@ -24,10 +25,15 @@ export class VextPackPlugin implements Plugin {
     }
 
     apply(compiler: Compiler) {
-
-        if (this._options.hotReloadSupport) {
+        const vuiccPath = join(this._options.compilerPath, this._options.compilerFile);
+        if (!fs.existsSync(vuiccPath)) {
+            console.error('Vuicc does not exist at path: ' + vuiccPath);
+            return new Promise<void>((resolve) => {
+                resolve();
+			});
+        } else if (this._options.hotReloadSupport) {
             console.log('VextPack: Enabling Hot Reload Support');
-            compiler.hooks.afterPlugins.tap(VextPackPlugin.name, () => {
+            return compiler.hooks.afterPlugins.tap(VextPackPlugin.name, () => {
                 return this._vuicc.compile({
                     sourcePath: join(__dirname, '..', 'proxy'),
                     outputPath: this._options.outputPath
@@ -47,7 +53,7 @@ export class VextPackPlugin implements Plugin {
 
                 return this._vuicc.compile({
                     sourcePath: compilation.outputOptions.path,
-                    outputPath: this._options.outputPath                
+                    outputPath: this._options.outputPath
                 });
             });
         }
