@@ -25,13 +25,18 @@ export class VextPackPlugin implements Plugin {
     }
 
     apply(compiler: Compiler) {
+        if (process.platform !== 'win32') {
+            console.error('vuicc.exe currently only supports Windows, compiler disabled.');
+            return;
+        }
+
         const vuiccPath = join(this._options.compilerPath, this._options.compilerFile);
         if (!fs.existsSync(vuiccPath)) {
-            console.error('Vuicc does not exist at path: ' + vuiccPath);
-            return new Promise<void>((resolve) => {
-                resolve();
-			});
-        } else if (this._options.hotReloadSupport) {
+            console.error('vuicc.exe does not exist at path: ' + vuiccPath + ', compiler disabled.');
+            return;
+        }
+        
+        if (this._options.hotReloadSupport) {
             console.log('VextPack: Enabling Hot Reload Support');
             return compiler.hooks.afterPlugins.tap(VextPackPlugin.name, () => {
                 return this._vuicc.compile({

@@ -19,7 +19,7 @@ export class VuicCompiler {
         return new Promise((resolve, reject) => {
             child.on('close', code => {
                 if (code !== 0) {
-                    reject(`vuic exited with unexpected exit code: ${code}`);
+                    reject(`vuicc exited with unexpected exit code: ${code}`);
                 }
 
                 resolve();
