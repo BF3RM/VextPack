@@ -16,7 +16,8 @@ yarn -D vextpack
 ```
 
 ## Usage
-VextPack is just a regular Webpack plugin and can be used as follows:
+When installing VextPack it will automatically download the latest vuicc.exe, so you don't have to download it.
+Using VextPack is simple, it is just a regular Webpack plugin and can be used as follows:
 ```js
 // webpack.config.js
 const { VextPackPlugin } = require('vextpack');
@@ -25,15 +26,11 @@ module.exports = {
     // ...
     plugins: [
         new VextPackPlugin({
-            // OPTIONAL: Specify the location of the vuic compiler (not included in this package!)
-            /// defaults to process.env.VUICC_PATH
-            compilerPath: 'path/to/vuicc',
-
-            // OPTIONAL: Custom file name of the compiler, defaults to 'vuicc.exe'
-            compilerFile: 'vuicc.exe',
-
             // OPTIONAL: Specify the location where the ui.vuic should be placed, defaults to '../'
-            outputPath: '../'
+            outputPath: '../',
+
+            // OPTIONAL: Make a hot reloadable ui build, this creates a proxy ui that remotely loads the real ui
+            hotReloadSupport: process.env.NODE_ENV !== 'production'
         })
     ]
 }

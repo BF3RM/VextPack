@@ -2,7 +2,6 @@ import { Compiler, Plugin } from "webpack";
 import { VextPackConfig } from "./config";
 import { VuicCompiler } from "./compiler";
 import { join } from "path";
-import fs from 'fs';
 
 export class VextPackPlugin implements Plugin {
 
@@ -11,28 +10,19 @@ export class VextPackPlugin implements Plugin {
 
     constructor(options?: Partial<VextPackConfig>) {
         this._options = {
-            compilerPath: process.env.VUICC_PATH!,
             outputPath: '../',
-            compilerFile: 'vuicc.exe',
             hotReloadSupport: false,
             ...options
         }
 
         // TODO: Catch invalid compiler options
 
-        this._vuicc = new VuicCompiler(join(
-            this._options.compilerPath, this._options.compilerFile));
+        this._vuicc = new VuicCompiler(join(__dirname, 'vuicc.exe'));
     }
 
     apply(compiler: Compiler) {
         if (process.platform !== 'win32') {
             console.error('vuicc.exe currently only supports Windows, compiler disabled.');
-            return;
-        }
-
-        const vuiccPath = join(this._options.compilerPath, this._options.compilerFile);
-        if (!fs.existsSync(vuiccPath)) {
-            console.error('vuicc.exe does not exist at path: ' + vuiccPath + ', compiler disabled.');
             return;
         }
         
